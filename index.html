@@ -4,9 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <script src="index.js"></script>
 <body>
+    <div id="playingButtons">
+        <button id="stoneBtn">Stone</button>
+        <button id="paperBtn">Paper</button>
+        <button id="scissorBtn">Scissor</button>
+    </div>
+
+    <div id="roundBoard">
+        <h1 id="displayRoundNumber"></h1>
+        <h2 id="displayRoundWinner"></h2>
+    </div>
+
+    <div id="scoreBoard">
+        <div id="playerscore">
+            <h2>Player</h2>
+            <p id="displayPlayerChoice"></p>
+            <p id="displayPlayerScore"></p>
+        </div>
+        <div id="computerscore">
+            <h2>Computer</h2>
+            <p id="displayComputerChoice"></p>
+            <p id="displayComputerScore"></p>
+        </div>
+    </div>
 
 </body>
 </html>
