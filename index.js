@@ -1,49 +1,56 @@
-let playerChoiceStone = querySelector("#stoneBtn");
-let playerChoicePaper = querySelector("#paperBtn");
-let playerChoiceScissor = querySelector("#scissorBtn");
+let playerChoiceStone = document.querySelector("#stoneBtn");
+let playerChoicePaper = document.querySelector("#paperBtn");
+let playerChoiceScissor = document.querySelector("#scissorBtn");
 let roundNumber = 0;
 let playerScore = 0;
 let computerScore = 0;
 let playerChoice;
+let computerChoice;
 
-let displayRoundNumber = querySelector("#displayRoundNumber")
-let displayRoundWinner = querySelector("#displayRoundWinner")
-let displayPlayerChoice = querySelector("#displayPlayerChoice")
-let displayPlayerScore = querySelector("#displayPlayerScore")
-let displayComputerChoice = querySelector("#displayComputerChoice")
-let displayComputerScore = querySelector("#displayComputerScore")
+let displayRoundNumber = document.querySelector("#displayRoundNumber")
+let displayRoundWinner = document.querySelector("#displayRoundWinner")
+let displayPlayerChoice = document.querySelector("#displayPlayerChoice")
+let displayPlayerScore = document.querySelector("#displayPlayerScore")
+let displayComputerChoice = document.querySelector("#displayComputerChoice")
+let displayComputerScore = document.querySelector("#displayComputerScore")
 
 
-playerChoiceStone.addEventListner("click", ()=> {
-    playerChoice = "STONE"
-    playgame()
+
+playerChoiceStone.addEventListener("click", ()=> {
+    playerChoice = "ROCK"
+    playGame()
 } )
-playerChoicePaper.addEventListner("click", ()=> {
+playerChoicePaper.addEventListener("click", ()=> {
     playerChoice = "PAPER"
-    playgame()
+    playGame()
 } )
-playerChoiceScissor.addEventListner("click", ()=> {
+playerChoiceScissor.addEventListener("click", ()=> {
     playerChoice = "SCISSOR"
-    playgame()
+    playGame()
 } )
-async function playGame(){
-    await buttonpressed;
-    let computerChoice = getComputerChoice();
+
+
+ async function playGame(){
+    await GamepadButton
+    computerChoice = getComputerChoice();
     roundNumber++;
-    gameResult(computerChoice, playerChoice)
+    if(playerChoice != "FALSE")
+        gameResult(computerChoice, playerChoice)
+    
+    
 }
 
 //Randomly selects computers choice using Math.random
 function getComputerChoice(){
     let choices = ["ROCK","PAPER","SCISSOR"]
-    let computerChoice = Math.floor(Math.random()*3);
+    computerChoice = Math.floor(Math.random()*3);
     return choices[computerChoice]
 }
 
 //Comparing the player choice and computer's choice to see the result
 function gameResult(computerChoice, playerChoice){
-    displayRoundNumber.innerHTML() = roundNumber
-    while(computerScore < 5 && playerScore < 5){
+    displayRoundNumber.innerHTML = roundNumber
+    if(computerScore < 5 && playerScore < 5){
     if(playerChoice == computerChoice){
         result = "TIE"
         updateBoard()
@@ -63,22 +70,25 @@ function gameResult(computerChoice, playerChoice){
     }
     else
         console.log("Try Again!!! Invalid Input ");
+        console.log(playerChoice);
+        console.log(computerChoice);
     }
     if(playerScore == 5){
         result = `YOU WON
         Game Ends`
-        updateBoard()
+        updateBoard()   
     } else {
         result = `YOU LOST
         Game Ends`
         updateBoard()
     }
+    playerChoice = "FALSE"
 }
 
 function updateBoard(result){
-    displayRoundWinner.innerHTML() = result
-    displayComputerChoice.innerHTML() = computerChoice
-    displayPlayerChoice.innerHTML() = playerChoice
-    displayComputerScore.innerHTML() = computerScore
-    displayPlayerScore.innerHTML() = playerScore
-}
+    displayRoundWinner.innerHTML = result
+    displayComputerChoice.innerHTML = computerChoice
+    displayPlayerChoice.innerHTML = playerChoice
+    displayComputerScore.innerHTML = computerScore
+    displayPlayerScore.innerHTML = playerScore
+} 
