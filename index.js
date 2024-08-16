@@ -1,11 +1,13 @@
 let playerChoiceStone = document.querySelector("#stoneBtn");
 let playerChoicePaper = document.querySelector("#paperBtn");
 let playerChoiceScissor = document.querySelector("#scissorBtn");
+let playAgainBtn = document.querySelector("#playAgainBtn")
 let roundNumber = 0;
 let playerScore = 0;
 let computerScore = 0;
-let playerChoice;
-let computerChoice;
+let playerChoice = "";
+let computerChoice = "";
+let result = "Choose";
 
 let displayRoundNumber = document.querySelector("#displayRoundNumber")
 let displayRoundWinner = document.querySelector("#displayRoundWinner")
@@ -13,6 +15,7 @@ let displayPlayerChoice = document.querySelector("#displayPlayerChoice")
 let displayPlayerScore = document.querySelector("#displayPlayerScore")
 let displayComputerChoice = document.querySelector("#displayComputerChoice")
 let displayComputerScore = document.querySelector("#displayComputerScore")
+updateBoard(result)
 
 
 
@@ -29,15 +32,11 @@ playerChoiceScissor.addEventListener("click", ()=> {
     playGame()
 } )
 
-
- async function playGame(){
-    await GamepadButton
+  function playGame(){
+    
     computerChoice = getComputerChoice();
     roundNumber++;
-    if(playerChoice != "FALSE")
-        gameResult(computerChoice, playerChoice)
-    
-    
+    gameResult(computerChoice, playerChoice)
 }
 
 //Randomly selects computers choice using Math.random
@@ -47,42 +46,42 @@ function getComputerChoice(){
     return choices[computerChoice]
 }
 
-//Comparing the player choice and computer's choice to see the result
+//Comparing the player choice and computer's choice to see the result 
 function gameResult(computerChoice, playerChoice){
     displayRoundNumber.innerHTML = roundNumber
     if(computerScore < 5 && playerScore < 5){
     if(playerChoice == computerChoice){
         result = "TIE"
-        updateBoard()
-        playGame()
     }
     else if(playerChoice=="ROCK"&&computerChoice=="PAPER" || playerChoice=="PAPER"&&computerChoice=="SCISSOR" ||playerChoice=="SCISSOR"&&computerChoice=="ROCK"){
         result = "YOU LOST"
         computerScore++
-        updateBoard()
-        playGame()
     }
     else if(playerChoice=="ROCK"&&computerChoice=="SCISSOR" || playerChoice=="PAPER"&&computerChoice=="ROCK" ||playerChoice=="SCISSOR"&&computerChoice=="PAPER"){
         result = "YOU WON"
         playerScore++;
-        updateBoard()
-        playGame()
     }
     else
         console.log("Try Again!!! Invalid Input ");
-        console.log(playerChoice);
-        console.log(computerChoice);
+
+    console.log(playerChoice);
+    console.log(computerChoice);
+    updateBoard(result)
     }
     if(playerScore == 5){
         result = `YOU WON
         Game Ends`
-        updateBoard()   
-    } else {
+        updateBoard(result)   
+        playingButtons.style.display="none"
+        playAgain.style.display="block"
+    } 
+    if(computerScore == 5){
         result = `YOU LOST
         Game Ends`
-        updateBoard()
+        updateBoard(result)
+        playingButtons.style.display="none"
+        playAgain.style.display="block"
     }
-    playerChoice = "FALSE"
 }
 
 function updateBoard(result){
@@ -92,3 +91,7 @@ function updateBoard(result){
     displayComputerScore.innerHTML = computerScore
     displayPlayerScore.innerHTML = playerScore
 } 
+
+playAgainBtn.addEventListener("click",()=>{
+    location.reload()
+})
